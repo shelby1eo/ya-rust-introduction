@@ -16,6 +16,7 @@ RUN apt update && apt install -y \
     fish \
     git \
     git-lfs \
+    iproute2 \
     ripgrep \
     sudo \
     tmux \
@@ -23,7 +24,6 @@ RUN apt update && apt install -y \
     unzip \
     vim \
     wget
-
 
 # Ubuntu 24.04 has already the user 1000(ubuntu) and the group users(100) 1000(ubuntu).
 # Add user if not using default uid like in a enterprise.
@@ -59,4 +59,9 @@ RUN cd /tmp \
   && echo export PATH="\$PATH:/home/$USRNAME/bin/nvim-linux-x86_64/bin" >> /home/$USRNAME/.bashrc \
   && echo "set -x PATH ~/.cargo/bin \$PATH" >> /home/$USRNAME/.config/fish/config.fish
 
-ENTRYPOINT ["fish"]
+# use login shell inorder to have .hashrc sourced.
+SHELL ["/bin/bash", "-l", "-c"]
+RUN cargo install mdbook
+
+ENTRYPOINT ["bash", "-l", "-c"]
+CMD ["mdbook serve"]
