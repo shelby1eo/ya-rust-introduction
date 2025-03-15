@@ -1,8 +1,37 @@
 [book]
-authors = []
+authors = ["Leonard Shelby"]
 language = "en"
 multilingual = false
 src = "src"
 title = "ya-rust-introduction"
 
+[rust]
+edition = "2018"
+# edition = "2024"
+
 [preprocessor.aquascope]
+
+[output.html]
+smart-punctuation = true
+mathjax-support = true
+site-url = "/mdBook/"
+git-repository-url = "https://github.com/shelby1eo/ya-rust-introduction/tree/master"
+edit-url-template = "https://github.com/shelby1eo/ya-rust-introduction/tree/master/{path}"
+hash-files = true
+
+[output.html.playground]
+editable = true
+line-numbers = true
+
+[output.html.code.hidelines]
+python = "~"
+
+[output.html.search]
+limit-results = 20
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 2
+boost-paragraph = 1
+expand = true
+heading-split-level = 2
+
