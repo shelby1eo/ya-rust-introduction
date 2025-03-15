@@ -1,4 +1,12 @@
-.PHONY: dockerBuild dockerRun dockerRm dockerShell dockerStartBook all all-interactive
+.PHONY: dockerBuild dockerRun dockerRm dockerShell dockerStartBook dockerBuildBook
+.PHONY: all all-interactive all-build
+
+dockerRm:
+	sudo docker rm -f rustintro
+
+dockerShell:
+	sudo docker exec -it rustintro fish
+
 dockerBuild:
 	sudo docker build \
 		--network=host \
@@ -10,43 +18,35 @@ dockerBuild:
 		--build-arg HTTPS_PROXY=$$https_proxy \
 		-t rustintroimage .
 
+
+DOCKER_RUN_BASE_COMMAND= \
+    sudo docker run \
+    -dit \
+    -v $$(pwd):$$(pwd) \
+    --network=host \
+    --name rustintro \
+    rustintroimage
+
+.PHONY: test
+test:
+	echo $(DOCKER_RUN_BASE_COMMAND)
+
 # if you are under a proxy please set on ~/.docker/config.json to the address 127.0.0.1:3128
 dockerRun:
-	sudo docker run \
-		-dit \
-		-v $$(pwd):$$(pwd) \
-		--network=host \
-		--name rustintro \
-		rustintroimage fish
+	$(DOCKER_RUN_BASE_COMMAND) fish
 
 # will start the webserver on localhost:3000
 dockerStartBook:
-	sudo docker run \
-		-dit \
-		-v $$(pwd):$$(pwd) \
-		--network=host \
-		--name rustintro \
-		rustintroimage
+	$(DOCKER_RUN_BASE_COMMAND) "mdbook serve"
 	@echo ""
 	@echo "############################################"
 	@echo "webserver started on http://localhost:3000"
 	@echo "############################################"
 
-dockerRm:
-	sudo docker rm -f rustintro
-
-dockerShell:
-	sudo docker exec -it rustintro fish
+dockerBuildBook:
+	$(DOCKER_RUN_BASE_COMMAND) "mdbook build"
 
 all: dockerRm dockerBuild dockerStartBook
 all-interactive: dockerRm dockerBuild dockerRun dockerShell
+all-build: dockerRm dockerBuild dockerBuildBook
 
-.PHONY: bookStart
-bookStart:
-	mdbook serve
-
-.PHONY: script
-script:
-	mkdir -p ~/bin
-	curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.25/mdbook-v0.4.25-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=/home/$$USER/bin
-	curl -sSL https://github.com/cognitive-engineering-lab/aquascope/releases/download/v0.3.4/aquascope-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=/home/$$USER/bin
