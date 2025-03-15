@@ -45,6 +45,7 @@ jobs:
       - name: build the book
         run: |
           make all-build
+          cp google52bbcd6bdc5c2885.html book/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

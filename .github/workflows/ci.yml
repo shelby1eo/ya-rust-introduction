@@ -42,6 +42,7 @@ jobs:
       - name: build the book
         run: |
           make all-build
+          cp google52bbcd6bdc5c2885.html book/
   # Uncomment section to test deploy. START
   #     - name: Upload artifact
   #       uses: actions/upload-pages-artifact@v3
