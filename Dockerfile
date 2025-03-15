@@ -92,4 +92,4 @@ ENV https_proxy=
 ENV http_proxy=
 
 ENTRYPOINT ["bash", "-l", "-c"]
-CMD ["mdbook serve"]
+CMD ["mdbook build"]
