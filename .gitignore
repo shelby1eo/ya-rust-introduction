@@ -1,2 +1,4 @@
 book
 .aquascope-cache
+src/aquascope/style.css
+src/aquascope/embed.iife.js
