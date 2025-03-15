@@ -1,11 +1,11 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: ci
+run-name: ${{ github.actor }} triggered the build.
 on:
   push:
   schedule:
     - cron: "0 4 * * 0" # 4:00am on Sunday
 jobs:
-  Explore-GitHub-Actions:
+  checkout-repo:
     runs-on: ubuntu-latest
     steps:
       - run: |
