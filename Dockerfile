@@ -6,7 +6,7 @@ ARG REPO_PATH=
 ARG HTTP_PROXY=
 ARG HTTPS_PROXY=
 ARG AQUASCOPE_VERSION=0.3.4
-ARG MDBOOK_VERSION=0.4.25
+ARG MDBOOK_VERSION=0.4.47
 ARG AQUASCOPE_TOOLCHAIN=nightly-2023-08-25
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -92,4 +92,4 @@ ENV https_proxy=
 ENV http_proxy=
 
 ENTRYPOINT ["bash", "-l", "-c"]
-CMD ["mdbook serve"]
+CMD ["mdbook build"]

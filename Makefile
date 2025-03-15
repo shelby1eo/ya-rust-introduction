@@ -18,33 +18,26 @@ dockerBuild:
 		--build-arg HTTPS_PROXY=$$https_proxy \
 		-t rustintroimage .
 
-
 DOCKER_RUN_BASE_COMMAND= \
     sudo docker run \
-    -dit \
     -v $$(pwd):$$(pwd) \
     --network=host \
-    --name rustintro \
-    rustintroimage
-
-.PHONY: test
-test:
-	echo $(DOCKER_RUN_BASE_COMMAND)
+    --name rustintro
 
 # if you are under a proxy please set on ~/.docker/config.json to the address 127.0.0.1:3128
 dockerRun:
-	$(DOCKER_RUN_BASE_COMMAND) fish
+	$(DOCKER_RUN_BASE_COMMAND) -dit rustintroimage "fish"
 
 # will start the webserver on localhost:3000
 dockerStartBook:
-	$(DOCKER_RUN_BASE_COMMAND) "mdbook serve"
+	$(DOCKER_RUN_BASE_COMMAND) -dit rustintroimage "mdbook serve"
 	@echo ""
 	@echo "############################################"
 	@echo "webserver started on http://localhost:3000"
 	@echo "############################################"
 
 dockerBuildBook:
-	$(DOCKER_RUN_BASE_COMMAND) "mdbook build"
+	$(DOCKER_RUN_BASE_COMMAND) rustintroimage "mdbook build"
 
 all: dockerRm dockerBuild dockerStartBook
 all-interactive: dockerRm dockerBuild dockerRun dockerShell
