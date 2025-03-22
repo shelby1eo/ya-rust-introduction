@@ -7,6 +7,9 @@ then you have mastered that concept (I don't remember who told me that).
 The original idea was to touch those fundamental Rust concepts in order to facilitate the first impact
 of someone who have just started with Rust.
 
+Chapters are organized in a didactical logic instead of cluster of logical topics,
+which means starting with small and simple concepts then evolving in more complex things.
+
 When possible i will try to link directly the Rust Book in order to avoid duplication.  
 A lot is inspired by the official learning materials provided by Rust, please read them they are the best.  
 - [Rust Book](https://rust-book.cs.brown.edu/experiment-intro.html) 

@@ -45,21 +45,21 @@ jobs:
           make all-build
           cp google52bbcd6bdc5c2885.html book/
   # Uncomment section to test deploy. START
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: book/
-
-  deploy-book:
-    environment:
-      name: github-pages
-      url: ${{steps.deployment.outputs.page_url}}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+  #     - name: Upload artifact
+  #       uses: actions/upload-pages-artifact@v3
+  #       with:
+  #         path: book/
+  #
+  # deploy-book:
+  #   environment:
+  #     name: github-pages
+  #     url: ${{steps.deployment.outputs.page_url}}
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - name: Deploy to GitHub Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v4
   # Uncomment section to test deploy. END
 
   docker-build-not-default-uid:
