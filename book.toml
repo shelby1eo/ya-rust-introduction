@@ -12,6 +12,7 @@ edition = "2018"
 [preprocessor.aquascope]
 
 [output.html]
+default-theme = "Rust"
 smart-punctuation = true
 mathjax-support = true
 site-url = "/mdBook/"

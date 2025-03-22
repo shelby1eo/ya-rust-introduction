@@ -81,9 +81,9 @@ RUN  \
 # use login shell inorder to have .hashrc sourced.
 RUN \
      rustup set profile minimal \
-  && rustup toolchain install 1.81 -c rust-docs \
+  && rustup toolchain install 1.81 -c rust-docs,rust-analyzer \
   && rustup default 1.81 \
-  && rustup toolchain install ${AQUASCOPE_TOOLCHAIN} -c rust-src,rustc-dev,llvm-tools-preview,miri \
+  && rustup toolchain install ${AQUASCOPE_TOOLCHAIN} -c rust-src,rustc-dev,llvm-tools-preview,miri,rust-analyzer \
   && cargo +${AQUASCOPE_TOOLCHAIN} miri setup \
   && echo "set -x LD_LIBRARY_PATH $($(rustup which --toolchain ${AQUASCOPE_TOOLCHAIN} rustc) --print target-libdir) \$LD_LIBRARY_PATH" >> /home/${USRNAME}/.config/fish/config.fish
 
