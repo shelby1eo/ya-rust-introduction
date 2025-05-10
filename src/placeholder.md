@@ -1,8 +1,3 @@
 # Placeholder
 
-- functions and return types
-
-- lifetime borrow checker
-- slices
-
-- cretes
+- [very compilcate way to explain copy and clone](https://oswalt.dev/2023/12/copy-and-clone-in-rust/)
