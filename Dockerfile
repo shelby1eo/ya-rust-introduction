@@ -33,7 +33,9 @@ RUN \
     tree \
     unzip \
     vim \
-    wget
+    wget \
+    lua5.4 \
+    luarocks
 
 # Ubuntu 24.04 has already the user 1000(ubuntu) and the group users(100) 1000(ubuntu).
 # Add user if not using default uid like in a enterprise.
@@ -74,11 +76,10 @@ RUN \
   && echo "set -x PATH ~/bin ~/.cargo/bin ~/bin/nvim-linux-x86_64/bin \$PATH" >> /home/${USRNAME}/.config/fish/config.fish
 
 # inspired by: https://github.com/cognitive-engineering-lab/rust-book/blob/main/.github/workflows/main.yml
-RUN  \
+RUN \
      curl -sSL https://github.com/rust-lang/mdBook/releases/download/v${MDBOOK_VERSION}/mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=/home/${USRNAME}/bin \
   && curl -sSL https://github.com/cognitive-engineering-lab/aquascope/releases/download/v${AQUASCOPE_VERSION}/aquascope-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=/home/${USRNAME}/bin
 
-# use login shell inorder to have .hashrc sourced.
 RUN \
      rustup set profile minimal \
   && rustup toolchain install 1.81 -c rust-docs,rust-analyzer \
@@ -91,5 +92,6 @@ RUN \
 ENV https_proxy=
 ENV http_proxy=
 
+# use login shell inorder to have .hashrc sourced.
 ENTRYPOINT ["bash", "-l", "-c"]
 CMD ["mdbook build"]

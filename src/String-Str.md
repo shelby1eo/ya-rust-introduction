@@ -58,20 +58,44 @@ fn main(){
 }
 ```
 ### different type of strings
-Rust has several types of strings, here we gonna only to show the two basics one std::strings and std::str.
+Rust has several types of strings, here we gonna only to show the two basics ones:
+- std::strings is a string.
+- std::str is the string literal or a slice.
+
 An exaustive explanation of all strings type can be found here [All Rust string types explained](https://www.youtube.com/watch?v=CpvzeyzgQdw&t=636s).
+
+<div class="warning">
+    Aquascope at the moment cannot render string literal, so we need look directly to the addesses to determine if it is allocated in the stack or heap.
+</div>
+
 ```rust,editable
 fn print_type_of<T>(_: &T) {
     println!("{}", std::any::type_name::<T>());
 }
 fn main() {
     // Rust has several string types:
-    let myStr = "initial contents 🍄"; // str into the stack.
-    print_type_of(&myStr); // type std::str which is not a std::String.
-    let myString = myStr.to_string();
-    print_type_of(&myString); // type std::str which is not a std::String.
-    println!("myStr_ptr = {:?}", myStr.as_ptr());
-    println!("myString_ptr = {:?}", myString.as_ptr());
+    // string literal stored into the stack and they are of type &str
+    let my_str: &str = "initial contents 🍄";
+    print!("String literal has type: ");
+    print_type_of(&my_str);
+    // It can be converted in a String type
+    print!("to_string will convert it to the type: ");
+    let mut my_string = my_str.to_string();
+    print_type_of(&my_string);
+
+    my_string.push_str("aa");
+    let string2 = String::from("123456");
+    // it is also possible to get the pointer to the string container.
+    println!("my_str_ptr =    {:?} stack", my_str.as_ptr());
+    println!("my_string_ptr = {:?} heap", my_string.as_ptr());
+    println!("String2_ptr =   {:?} heap", string2.as_ptr());
+
+    // slices
+    println!("");
+    println!("##############################################");
+    println!("slices std::str can point to both stack and heap");
+    println!("my_str_slice_ptr =  {:?} stack", &my_str[1..my_str.len()].as_ptr());
+    println!("String2_slice_ptr = {:?} heap", &string2[1..string2.len()].as_ptr());
 }
 ```
 
@@ -85,7 +109,7 @@ fn main() {
 ```
 The reason is that a String in rust is more complex that a String in C which is just an array of char with a terminating '\0'.
 A String in Rust is implemented as a wrapper over Vec<>, to see the details click on the binoculars:
-```aquascope,interpreter
+```aquascope,interpreter,horizontal
 #fn main() {
     // different way to declare arrays:
     let hello = String::from("नमस्ते");
@@ -106,7 +130,7 @@ fn main() {
     println!("{}", slice_hello.as_bytes()[0]);
 }
 ```
-```aquascope,interpreter
+```aquascope,interpreter,horizontal
 #fn main() {
     let hello = String::from("नमस्ते");
     let slice_hello = &hello[0..3];

@@ -6,3 +6,4 @@ Here we are going to look in details to the following points:
 - String/Str
 - Stack/Heap
 
+

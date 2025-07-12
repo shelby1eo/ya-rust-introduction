@@ -21,8 +21,10 @@ dockerBuild:
 DOCKER_RUN_BASE_COMMAND= \
     sudo docker run \
     -v $$(pwd):$$(pwd) \
-    --network=host \
-    --name rustintro
+    --network host \
+    --name rustintro \
+    --env http_proxy=$$http_proxy \
+    --env https_proxy=$$https_proxy
 
 # if you are under a proxy please set on ~/.docker/config.json to the address 127.0.0.1:3128
 dockerRun:
