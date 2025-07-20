@@ -1,4 +1,2 @@
 # Struct
 
-
-## Truple Struct

@@ -1,4 +1,4 @@
-# Truple
+# Tuple
 
 A tuple is a collection of values of different types.  
 It can be useful to:
@@ -29,10 +29,27 @@ fn main(){
     let c = myfunc();
     println!("{:?}", c);
 
+    let (d, e) = myfunc();
+    println!("{:?}", d);
+    println!("{:?}", e);
 }
 ```
 
-## Truple can be named
+## de-Tuple
+```rust,editable
+fn main(){
+    let a = 42u32;
+    let b = Vec::from([8, 9]);
+    let c = (a, b);
+    println!("{:?}", c);
+
+    let (d, e) = c;
+    println!("{:?}", d);
+    println!("{:?}", e);
+}
+```
+
+## Tuple can be named
 
 ```rust,editable
 fn myfunc() -> (u32, u32) {
@@ -67,6 +84,7 @@ fn main(){
 }
 ```
 
-
+## Tuple-unit
+[Tuple-unit](https://rust-book.cs.brown.edu/ch03-02-data-types.html#the-tuple-type).
 
 
