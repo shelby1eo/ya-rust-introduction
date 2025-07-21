@@ -44,3 +44,11 @@ I am gloss over the huge effort of maintaining the tooling for C/C++ ultimately 
 - almost for each Clang tool gcc has an equivalent.
 
 Rust Lang shakes away that constant fear of shooting yourself on the foot.
+
+Fundamental concept to grasp:
+- memory allocation heap or stack.
+- copy or transfering ownership ( **"="** , **"&"** and **"*"**).
+- everything is build around a type.
+- lifetime.
+
+
